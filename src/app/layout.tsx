@@ -10,7 +10,7 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "Next Pizza",
+  title: "Pizza Hub",
   description: "Created by Igor Malov",
 };
 
