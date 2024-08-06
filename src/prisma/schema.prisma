@@ -1,0 +1,143 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+// one-to-one relationship: one user can have only one cart
+// one-to-many relationship: one user can have many orders
+// one-to-one relationship: one user can have only one verification code
+model User {
+    id               Int               @id @default(autoincrement())
+    fullName         String
+    email            String            @unique
+    password         String
+    provider         String?
+    providerId       String?
+    role             UserRole          @default(USER)
+    cart             Cart?
+    orders           Order[]
+    verificationCode VerificationCode?
+    createdAt        DateTime          @default(now())
+    updatedAt        DateTime          @updatedAt
+}
+
+// one-to-many relationship: one category has many products
+model Category {
+    id        Int       @id @default(autoincrement())
+    name      String    @unique
+    products  Product[]
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+}
+
+// one-to-many relationship: one product belongs to one category
+// one-to-many relationship: one product can have many ingredients
+// one-to-many relationship: one product can have many variants
+model Product {
+    id          Int              @id @default(autoincrement())
+    name        String
+    imageUrl    String
+    category    Category         @relation(fields: [categoryId], references: [id])
+    categoryId  Int
+    ingredients Ingredient[]
+    variants    ProductVariant[]
+    createdAt   DateTime         @default(now())
+    updatedAt   DateTime         @updatedAt
+}
+
+//one-to-many relationship: one product can have many variants
+//one-to-many relationship: one variant can be in many cart items
+model ProductVariant {
+    id        Int        @id @default(autoincrement())
+    price     Int
+    size      Int?
+    pizzaType Int?
+    product   Product    @relation(fields: [productId], references: [id])
+    productId Int
+    cartItems CartItem[]
+}
+
+//many-to-many relationship: one ingredient can be in many products and one product can have many ingredients
+//one-to-many relationship: one ingredient can be in many cart items
+model Ingredient {
+    id        Int        @id @default(autoincrement())
+    name      String
+    price     Int
+    imageUrl  String
+    products  Product[]
+    cartItems CartItem[]
+    createdAt DateTime   @default(now())
+    updatedAt DateTime   @updatedAt
+}
+
+//one-to-one relationship: one user can have only one cart
+//one-to-many relationship: one cart can have many cart items
+model Cart {
+    id          Int        @id @default(autoincrement())
+    user        User?      @relation(fields: [userId], references: [id])
+    userId      Int?       @unique
+    items       CartItem[]
+    token       String     @unique
+    totalAmount Int        @default(0)
+    createdAt   DateTime   @default(now())
+    updatedAt   DateTime   @updatedAt
+}
+
+//many-to-one relationship: many cart items can be in one cart
+//many-to-one relationship: many cart items can have one product variant
+//many-to-many relationship: one cart item can have many ingredients and one ingredient can be in many cart items
+model CartItem {
+    id               Int            @id @default(autoincrement())
+    productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
+    productVariantId Int
+    cart             Cart           @relation(fields: [cartId], references: [id])
+    cartId           Int
+    quantity         Int
+    ingredients      Ingredient[]
+    createdAt        DateTime       @default(now())
+    updatedAt        DateTime       @updatedAt
+}
+
+model Order {
+    id          Int         @id @default(autoincrement())
+    user        User?       @relation(fields: [userId], references: [id])
+    userId      Int?
+    token       String
+    totalAmount Int
+    status      OrderStatus
+    paymentId   String?
+    items       Json
+    fullName    String
+    email       String
+    phone       String
+    address     String
+    comment     String?
+    createdAt   DateTime    @default(now())
+    updatedAt   DateTime    @updatedAt
+}
+
+//one-to-one relationship: one user can have only one verification code
+model VerificationCode {
+    id        Int      @id @default(autoincrement())
+    user      User     @relation(fields: [userId], references: [id])
+    userId    Int      @unique
+    code      String
+    createdAt DateTime @default(now())
+
+    @@unique([userId, code])
+}
+
+enum OrderStatus {
+    PENDING
+    SUCCEEDED
+    CANCELLED
+}
+
+enum UserRole {
+    USER
+    ADMIN
+}
