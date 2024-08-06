@@ -18,6 +18,7 @@ model User {
     provider         String?
     providerId       String?
     role             UserRole          @default(USER)
+    verified         DateTime
     cart             Cart?
     orders           Order[]
     verificationCode VerificationCode?
@@ -87,9 +88,9 @@ model Cart {
     updatedAt   DateTime   @updatedAt
 }
 
-//many-to-one relationship: many cart items can be in one cart
 //many-to-one relationship: many cart items can have one product variant
-//many-to-many relationship: one cart item can have many ingredients and one ingredient can be in many cart items
+//many-to-one relationship: many cart items can be in one cart
+//many-to-many relationship: one cart item can have many ingredients
 model CartItem {
     id               Int            @id @default(autoincrement())
     productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
