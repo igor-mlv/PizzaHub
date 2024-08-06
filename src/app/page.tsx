@@ -36,7 +36,7 @@ export default function Home() {
                   { id: 2, name: "Pizza 2", imageUrl: "https://cdn.pixabay.com/photo/2017/12/05/20/10/pizza-3000285_1280.png", items: [{ price: 20 }] },
                   { id: 3, name: "Pizza 3", imageUrl: "https://cdn.pixabay.com/photo/2017/12/05/20/10/pizza-3000285_1280.png", items: [{ price: 30 }] },
                 ]}
-                categoryId={1} />
+                categoryId={2} />
             </div>
           </div>
         </div>
