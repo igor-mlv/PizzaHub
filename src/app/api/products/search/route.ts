@@ -11,7 +11,8 @@ export async function GET(req: NextRequest) {
                 mode: "insensitive"
             },
         },
-        take: 5,
+        // or by default take 6 first products from database
+        take: 6,
     });
-    return NextResponse.json({ products });
+    return NextResponse.json(products);
 }
