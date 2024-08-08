@@ -87,7 +87,7 @@ async function up() {
                 'https://media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
             categoryId: 1,
             ingredients: {
-                connect: ingredients.slice(10, 40),
+                connect: ingredients.slice(10, 15),
             },
         },
     });

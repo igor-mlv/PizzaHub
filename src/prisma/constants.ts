@@ -136,7 +136,7 @@ export const products = [
         categoryId: 3,
     },
     {
-        name: 'Baked Potatoes with Sauce 🌱',
+        name: 'Baked Potatoes with Sauce',
         imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EED646A9CD324C962C6BEA78124F19.webp',
         categoryId: 3,
     },
