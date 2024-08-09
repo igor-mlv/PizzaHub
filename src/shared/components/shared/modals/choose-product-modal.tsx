@@ -1,11 +1,12 @@
 'use client';
 
-import { Dialog, DialogContent } from '@/shared/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/shared/components/ui/dialog';
 import { cn } from '@/shared/lib/utils';
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { ProductWithRelations } from '@/@types/prisma';
 import { ProductForm } from '../';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 interface Props {
     product: ProductWithRelations;
@@ -22,8 +23,16 @@ export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
                     'p-0 w-[1060px] max-w-[1060px] min-h-[500px] bg-white overflow-hidden',
                     className,
                 )}>
+
+                {/* used only to be accessible for screen reader users */}
+                <VisuallyHidden>
+                    <DialogTitle>Product Content</DialogTitle>
+                    <DialogDescription>Choose your product type</DialogDescription>
+                </VisuallyHidden>
+                {/*  */}
+
                 <ProductForm product={product} onSubmit={() => router.back()} />
             </DialogContent>
-        </Dialog>
+        </Dialog >
     );
 };

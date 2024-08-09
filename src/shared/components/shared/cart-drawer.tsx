@@ -7,11 +7,13 @@ import {
     Sheet,
     SheetClose,
     SheetContent,
+    SheetDescription,
     SheetFooter,
     SheetHeader,
     SheetTitle,
     SheetTrigger,
 } from '@/shared/components/ui/sheet';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import Link from 'next/link';
 import { Button } from '../ui';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
@@ -34,8 +36,15 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
     return (
         <Sheet>
             <SheetTrigger asChild>{children}</SheetTrigger>
-
             <SheetContent className="flex flex-col justify-between pb-0 bg-[#F4F1EE]">
+
+                {/* used only to be accessible for screen reader users */}
+                <VisuallyHidden>
+                    <SheetTitle>Cart Content</SheetTitle>
+                    <SheetDescription>List of user selected items</SheetDescription>
+                </VisuallyHidden>
+                {/*  */}
+
                 <div className={cn('flex flex-col h-full', !totalAmount && 'justify-center')}>
                     {totalAmount > 0 && (
                         <SheetHeader>
