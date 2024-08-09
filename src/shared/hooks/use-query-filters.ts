@@ -22,5 +22,5 @@ export const useQueryFilters = (filters: Filters) => {
             scroll: false,
         });
 
-    }, [filters, router])
+    }, [filters])
 }
