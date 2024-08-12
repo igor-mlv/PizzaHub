@@ -20,9 +20,9 @@ export default async function Home({ searchParams }: { searchParams: GetSearchPa
 
           {/* left panel - filter */}
           <div className="w-[250px]">
-            {/* <Suspense fallback={<div>Loading...</div>} > */}
-            <Filters />
-            {/* </Suspense> */}
+            <Suspense fallback={<div>Loading...</div>} >
+              <Filters />
+            </Suspense>
           </div>
 
           {/* right panel - list of products */}
