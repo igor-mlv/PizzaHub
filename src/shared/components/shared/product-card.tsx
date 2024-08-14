@@ -42,7 +42,7 @@ export const ProductCard: React.FC<Props> = ({
 
                 <div className='w-full flex justify-between items-center mt-4 absolute bottom-0'>
                     <span className='text-[20px]'>
-                        from <b>{price} CAD$</b>
+                        from <b>{price}$</b>
                     </span>
 
                     <Button variant="secondary" className='text-base font-bold w-[140px]'>

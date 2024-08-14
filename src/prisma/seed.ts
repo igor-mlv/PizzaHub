@@ -3,22 +3,20 @@ import { categories, ingredients, products } from "./constants";
 import { prisma } from "./prisma-client";
 import { hashSync } from 'bcrypt';
 
-const randomDecimalNumber = (min: number, max: number) => {
-    return Math.floor(Math.random() * (max - min) * 10 + min * 10) / 10;
-};
-
 const generateProductVariant = ({
     productId,
     pizzaType,
     size,
+    price
 }: {
     productId: number;
     pizzaType?: 1 | 2;
     size?: 20 | 30 | 40;
+    price: number;
 }) => {
     return {
         productId,
-        price: randomDecimalNumber(20, 99),
+        price,
         pizzaType,
         size,
     } as Prisma.ProductVariantUncheckedCreateInput;
@@ -30,14 +28,14 @@ async function up() {
             {
                 fullName: 'User Test',
                 email: 'user@test.ru',
-                password: hashSync('111111', 10),
+                password: hashSync('99', 10),
                 verified: new Date(),
                 role: 'USER',
             },
             {
                 fullName: 'Admin Admin',
                 email: 'admin@test.ru',
-                password: hashSync('111111', 10),
+                password: hashSync('99', 10),
                 verified: new Date(),
                 role: 'ADMIN',
             },
@@ -58,21 +56,21 @@ async function up() {
 
     const pizza1 = await prisma.product.create({
         data: {
-            name: 'Pepperoni',
+            name: 'Meat Pizza',
             imageUrl:
-                'https://media.dodostatic.net/image/r:233x233/11EE7D61304FAF5A98A6958F2BB2D260.webp',
+                '/assets/images/categories/pizzas/meat-pizza.png',
             categoryId: 1,
             ingredients: {
-                connect: ingredients.slice(0, 5),
+                connect: ingredients.slice(7, 15),
             },
         },
     })
 
     const pizza2 = await prisma.product.create({
         data: {
-            name: 'Cheese Pizza',
+            name: 'Julien Pizza',
             imageUrl:
-                'https://media.dodostatic.net/image/r:233x233/11EE7D610CF7E265B7C72BE5AE757CA7.webp',
+                '/assets/images/categories/pizzas/julien-pizza.png',
             categoryId: 1,
             ingredients: {
                 connect: ingredients.slice(5, 10),
@@ -82,9 +80,9 @@ async function up() {
 
     const pizza3 = await prisma.product.create({
         data: {
-            name: 'Chorizo Fresh',
+            name: 'Ham and Cheese',
             imageUrl:
-                'https://media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
+                '/assets/images/categories/pizzas/ham-and-cheese.png',
             categoryId: 1,
             ingredients: {
                 connect: ingredients.slice(10, 15),
@@ -92,44 +90,99 @@ async function up() {
         },
     });
 
+    const pizza4 = await prisma.product.create({
+        data: {
+            name: 'Chorizo Fresh',
+            imageUrl:
+                '/assets/images/categories/pizzas/chorizo-fresh.png',
+            categoryId: 1,
+            ingredients: {
+                connect: ingredients.slice(7, 13),
+            },
+        },
+    });
+
+    const pizza5 = await prisma.product.create({
+        data: {
+            name: 'Pepperoni',
+            imageUrl:
+                '/assets/images/categories/pizzas/pepperoni.png',
+            categoryId: 1,
+            ingredients: {
+                connect: ingredients.slice(2, 10),
+            },
+        },
+    });
+
+    const pizza6 = await prisma.product.create({
+        data: {
+            name: 'Cheese Pizza',
+            imageUrl:
+                '/assets/images/categories/pizzas/cheese-pizza.png',
+            categoryId: 1,
+            ingredients: {
+                connect: ingredients.slice(0, 5),
+            },
+        },
+    });
+
     await prisma.productVariant.createMany({
         data: [
-            // Pepperoni
-            generateProductVariant({ productId: pizza1.id, pizzaType: 1, size: 20 }),
-            generateProductVariant({ productId: pizza1.id, pizzaType: 2, size: 30 }),
-            generateProductVariant({ productId: pizza1.id, pizzaType: 2, size: 40 }),
+            // Meat Pizza
+            generateProductVariant({ productId: pizza1.id, pizzaType: 1, size: 20, price: 17 }),
+            generateProductVariant({ productId: pizza1.id, pizzaType: 2, size: 30, price: 24 }),
+            generateProductVariant({ productId: pizza1.id, pizzaType: 2, size: 40, price: 32 }),
 
-            // Cheese Pizza
-            generateProductVariant({ productId: pizza2.id, pizzaType: 1, size: 20 }),
-            generateProductVariant({ productId: pizza2.id, pizzaType: 1, size: 30 }),
-            generateProductVariant({ productId: pizza2.id, pizzaType: 1, size: 40 }),
-            generateProductVariant({ productId: pizza2.id, pizzaType: 2, size: 20 }),
-            generateProductVariant({ productId: pizza2.id, pizzaType: 2, size: 30 }),
-            generateProductVariant({ productId: pizza2.id, pizzaType: 2, size: 40 }),
+            // Julien Pizza
+            generateProductVariant({ productId: pizza2.id, pizzaType: 1, size: 20, price: 15 }),
+            generateProductVariant({ productId: pizza2.id, pizzaType: 1, size: 30, price: 25 }),
+            generateProductVariant({ productId: pizza2.id, pizzaType: 1, size: 40, price: 37 }),
+            generateProductVariant({ productId: pizza2.id, pizzaType: 2, size: 20, price: 14 }),
+            generateProductVariant({ productId: pizza2.id, pizzaType: 2, size: 30, price: 24 }),
+            generateProductVariant({ productId: pizza2.id, pizzaType: 2, size: 40, price: 34 }),
+
+            // Ham and Cheese
+            generateProductVariant({ productId: pizza3.id, pizzaType: 1, size: 20, price: 17 }),
+            generateProductVariant({ productId: pizza3.id, pizzaType: 2, size: 30, price: 24 }),
+            generateProductVariant({ productId: pizza3.id, pizzaType: 2, size: 40, price: 32 }),
 
             // Chorizo Fresh
-            generateProductVariant({ productId: pizza3.id, pizzaType: 1, size: 20 }),
-            generateProductVariant({ productId: pizza3.id, pizzaType: 2, size: 30 }),
-            generateProductVariant({ productId: pizza3.id, pizzaType: 2, size: 40 }),
+            generateProductVariant({ productId: pizza4.id, pizzaType: 1, size: 20, price: 16 }),
+            generateProductVariant({ productId: pizza4.id, pizzaType: 1, size: 30, price: 26 }),
+            generateProductVariant({ productId: pizza4.id, pizzaType: 1, size: 40, price: 37 }),
+            generateProductVariant({ productId: pizza4.id, pizzaType: 2, size: 20, price: 14 }),
+            generateProductVariant({ productId: pizza4.id, pizzaType: 2, size: 30, price: 24 }),
+            generateProductVariant({ productId: pizza4.id, pizzaType: 2, size: 40, price: 34 }),
+
+            // Pepperoni
+            generateProductVariant({ productId: pizza5.id, pizzaType: 1, size: 20, price: 18 }),
+            generateProductVariant({ productId: pizza5.id, pizzaType: 2, size: 30, price: 27 }),
+            generateProductVariant({ productId: pizza5.id, pizzaType: 2, size: 40, price: 34 }),
+
+            // Cheese Pizza
+            generateProductVariant({ productId: pizza6.id, pizzaType: 1, size: 20, price: 15 }),
+            generateProductVariant({ productId: pizza6.id, pizzaType: 1, size: 30, price: 25 }),
+            generateProductVariant({ productId: pizza6.id, pizzaType: 1, size: 40, price: 37 }),
+            generateProductVariant({ productId: pizza6.id, pizzaType: 2, size: 20, price: 14 }),
+            generateProductVariant({ productId: pizza6.id, pizzaType: 2, size: 30, price: 24 }),
+            generateProductVariant({ productId: pizza6.id, pizzaType: 2, size: 40, price: 34 }),
+
 
             // Other Products
-            generateProductVariant({ productId: 1 }),
-            generateProductVariant({ productId: 2 }),
-            generateProductVariant({ productId: 3 }),
-            generateProductVariant({ productId: 4 }),
-            generateProductVariant({ productId: 5 }),
-            generateProductVariant({ productId: 6 }),
-            generateProductVariant({ productId: 7 }),
-            generateProductVariant({ productId: 8 }),
-            generateProductVariant({ productId: 9 }),
-            generateProductVariant({ productId: 10 }),
-            generateProductVariant({ productId: 11 }),
-            generateProductVariant({ productId: 12 }),
-            generateProductVariant({ productId: 13 }),
-            generateProductVariant({ productId: 14 }),
-            generateProductVariant({ productId: 15 }),
-            generateProductVariant({ productId: 16 }),
-            generateProductVariant({ productId: 17 }),
+            generateProductVariant({ productId: 1, price: 2 }),
+            generateProductVariant({ productId: 2, price: 12 }),
+            generateProductVariant({ productId: 3, price: 4 }),
+            generateProductVariant({ productId: 4, price: 14 }),
+            generateProductVariant({ productId: 5, price: 18 }),
+            generateProductVariant({ productId: 6, price: 11 }),
+            generateProductVariant({ productId: 7, price: 17 }),
+            generateProductVariant({ productId: 8, price: 15 }),
+            generateProductVariant({ productId: 9, price: 12 }),
+            generateProductVariant({ productId: 10, price: 12 }),
+            generateProductVariant({ productId: 11, price: 16 }),
+            generateProductVariant({ productId: 12, price: 10 }),
+            generateProductVariant({ productId: 13, price: 12 }),
+            generateProductVariant({ productId: 14, price: 14 }),
         ],
     })
 
@@ -138,7 +191,7 @@ async function up() {
             {
                 userId: 1,
                 totalAmount: 0,
-                token: '111111',
+                token: '99',
             },
             {
                 userId: 2,

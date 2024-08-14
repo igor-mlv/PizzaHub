@@ -111,88 +111,74 @@ export const ingredients = [
 
 export const products = [
     {
-        name: 'Omelette with Ham and Mushrooms',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7970321044479C1D1085457A36EB.webp',
-        categoryId: 2,
-    },
-    {
-        name: 'Omelette with Pepperoni',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE94ECF33B0C46BA410DEC1B1DD6F8.webp',
-        categoryId: 2,
-    },
-    {
-        name: 'Coffee Latte',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7D61B0C26A3F85D97A78FEEE00AD.webp',
+        name: 'Triple Chocolate Muffin',
+        imageUrl: '/assets/images/categories/breakfast/triple-chocolate-muffin.png',
         categoryId: 2,
     },
     {
         name: 'Ham and Cheese Sandwich',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE796FF0059B799A17F57A9E64C725.webp',
+        imageUrl: '/assets/images/categories/breakfast/ham-and-cheese-sandwich.png',
+        categoryId: 2,
+    },
+    {
+        name: 'Coconut Latte',
+        imageUrl: '/assets/images/categories/breakfast/coconut-latte.png',
+        categoryId: 2,
+    },
+    {
+        name: 'French Fries',
+        imageUrl: '/assets/images/categories/snacks/french-fries.png',
+        categoryId: 3,
+    },
+    {
+        name: 'BBQ Chicken Wings',
+        imageUrl: '/assets/images/categories/snacks/bbq-chicken-wings.png',
         categoryId: 3,
     },
     {
         name: 'Chicken Nuggets',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7D618B5C7EC29350069AE9532C6E.webp',
+        imageUrl: '/assets/images/categories/snacks/chicken-nuggets.png',
         categoryId: 3,
     },
     {
-        name: 'Baked Potatoes with Sauce',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EED646A9CD324C962C6BEA78124F19.webp',
+        name: 'Meat Pasta',
+        imageUrl: '/assets/images/categories/snacks/meat-pasta.png',
         categoryId: 3,
     },
     {
-        name: 'Dodster',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE796F96D11392A2F6DD73599921B9.webp',
+        name: 'Carbonara Pasta',
+        imageUrl: '/assets/images/categories/snacks/carbonara-pasta.png',
         categoryId: 3,
     },
     {
-        name: 'Spicy Dodster 🌶️🌶️',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE796FD3B594068F7A752DF8161D04.webp',
-        categoryId: 3,
-    },
-    {
-        name: 'Banana Milkshake',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EEE20B8772A72A9B60CFB20012C185.webp',
+        name: 'Chocolate Milkshake',
+        imageUrl: '/assets/images/categories/cocktails/chocolate-milkshake.png',
         categoryId: 4,
     },
     {
-        name: 'Caramel Apple Milkshake',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE79702E2A22E693D96133906FB1B8.webp',
+        name: 'Strawberry Milkshake',
+        imageUrl: '/assets/images/categories/cocktails/strawberry-milkshake.png',
         categoryId: 4,
     },
     {
         name: 'Oreo Cookie Milkshake',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE796FA1F50F8F8111A399E4C1A1E3.webp',
+        imageUrl: '/assets/images/categories/cocktails/oreo-cookie-milkshake.png',
         categoryId: 4,
     },
     {
-        name: 'Classic Milkshake 👶',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE796F93FB126693F96CB1D3E403FB.webp',
-        categoryId: 4,
+        name: 'Cappuccino',
+        imageUrl: '/assets/images/categories/drinks/cappuccino.png',
+        categoryId: 5,
     },
     {
-        name: 'Irish Cappuccino',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7D61999EBDA59C10E216430A6093.webp',
+        name: 'Hazelnut Latte',
+        imageUrl: '/assets/images/categories/drinks/hazelnut-latte.png',
         categoryId: 5,
     },
     {
         name: 'Caramel Cappuccino',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7D61AED6B6D4BFDAD4E58D76CF56.webp',
+        imageUrl: '/assets/images/categories/drinks/caramel-cappuccino.png',
         categoryId: 5,
     },
-    {
-        name: 'Coconut Latte',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7D61B19FA07090EE88B0ED347F42.webp',
-        categoryId: 5,
-    },
-    {
-        name: 'Coffee Americano',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7D61B044583596548A59078BBD33.webp',
-        categoryId: 5,
-    },
-    {
-        name: 'Coffee Latte',
-        imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7D61B0C26A3F85D97A78FEEE00AD.webp',
-        categoryId: 5,
-    },
+
 ];
