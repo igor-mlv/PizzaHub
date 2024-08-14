@@ -5,5 +5,5 @@ import * as cart from "./cart"
 export const Api = {
     products,
     ingredients,
-    cart
+    cart,
 };
