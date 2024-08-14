@@ -90,16 +90,7 @@ export async function createOrder(data: CheckoutFormValues) {
       throw new Error('Payment data not found');
     }
 
-    await prisma.order.update({
-      where: {
-        id: order.id,
-      },
-      data: {
-        paymentId: paymentData.id,
-      },
-    });
-
-    const paymentUrl = paymentData.url;
+    const paymentUrl = paymentData.url || '';
 
     await sendEmail(
       data.email,

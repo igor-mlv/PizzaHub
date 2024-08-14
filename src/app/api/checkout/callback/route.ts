@@ -42,10 +42,35 @@ export async function POST(req: NextRequest) {
     case 'checkout.session.completed':
       const session = event.data.object;
 
-      console.log('Checkout Session completed with metadata:', session.metadata);
-      console.log('Order ID:', session.metadata?.order_id || null);
+      const orderId = session.metadata?.order_id;
+      const order = await prisma.order.findFirst({
+        where: {
+          id: Number(orderId),
+        },
+      });
 
-      // Handle successful session completion here, using the metadata as needed.
+      if (!order) {
+        return NextResponse.json({ error: 'Order not found' });
+      }
+
+      await prisma.order.update({
+        where: {
+          id: order.id,
+        },
+        data: {
+          status: OrderStatus.SUCCEEDED,
+          paymentId: session.payment_intent as string,
+        },
+      });
+
+      const items = JSON.parse(order?.items as string) as CartItemDTO[];
+
+      await sendEmail(
+        order.email,
+        'Pizza Hub / Your order has been successfully placed 🎉',
+        OrderSuccessTemplate({ orderId: order.id, items }),
+      );
+
       break;
     default:
       // Unexpected event type
@@ -54,45 +79,4 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json({ received: true });
 
-
-  // try {
-  //   const body = (await req.json());
-  //   console.log(body.object.metadata.order_id);
-
-  //   const order = await prisma.order.findFirst({
-  //     where: {
-  //       id: Number(body.object.metadata.order_id),
-  //     },
-  //   });
-
-  //   if (!order) {
-  //     return NextResponse.json({ error: 'Order not found' });
-  //   }
-
-  //   const isSucceeded = body.object.status === 'succeeded';
-
-  //   await prisma.order.update({
-  //     where: {
-  //       id: order.id,
-  //     },
-  //     data: {
-  //       status: isSucceeded ? OrderStatus.SUCCEEDED : OrderStatus.CANCELLED,
-  //     },
-  //   });
-
-  //   const items = JSON.parse(order?.items as string) as CartItemDTO[];
-
-  //   if (isSucceeded) {
-  //     await sendEmail(
-  //       order.email,
-  //       'Next Pizza / Ваш заказ успешно оформлен 🎉',
-  //       OrderSuccessTemplate({ orderId: order.id, items }),
-  //     );
-  //   } else {
-  //     // Письмо о неуспешной оплате
-  //   }
-  // } catch (error) {
-  //   console.log('[Checkout Callback] Error:', error);
-  //   return NextResponse.json({ error: 'Server error' });
-  // }
 }
