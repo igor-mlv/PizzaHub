@@ -32,19 +32,20 @@ export async function POST(req: NextRequest) {
     const payload = await req.text();
 
     try {
-      event = stripe.webhooks.constructEvent(payload, signature, endpointSecret
-      );
+      event = stripe.webhooks.constructEvent(payload, signature, endpointSecret);
     } catch (err) {
       return NextResponse.json({ error: 'Webhook signature verification failed' });
     }
   }
 
   switch (event?.type) {
-    case 'payment_intent.succeeded':
-      const paymentIntent = event.data.object;
-      console.log(`PaymentIntent for ${paymentIntent.amount} was successful!`, paymentIntent.metadata);
-      // Then define and call a method to handle the successful payment intent.
-      // handlePaymentIntentSucceeded(paymentIntent);
+    case 'checkout.session.completed':
+      const session = event.data.object;
+
+      console.log('Checkout Session completed with metadata:', session.metadata);
+      console.log('Order ID:', session.metadata?.order_id || null);
+
+      // Handle successful session completion here, using the metadata as needed.
       break;
     default:
       // Unexpected event type
