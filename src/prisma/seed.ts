@@ -109,7 +109,7 @@ async function up() {
                 '/assets/images/categories/pizzas/pepperoni.png',
             categoryId: 1,
             ingredients: {
-                connect: ingredients.slice(2, 10),
+                connect: ingredients.slice(5, 10),
             },
         },
     });
