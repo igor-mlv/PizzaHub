@@ -247,27 +247,62 @@ async function up() {
             {
                 storyId: 1,
                 sourceUrl:
-                    'https://cdn.inappstory.ru/file/dd/yj/sx/oqx9feuljibke3mknab7ilb35t.webp?k=IgAAAAAAAAAE',
+                    '/assets/images/stories/1/favorites-story-1.png',
             },
             {
                 storyId: 1,
                 sourceUrl:
-                    'https://cdn.inappstory.ru/file/jv/sb/fh/io7c5zarojdm7eus0trn7czdet.webp?k=IgAAAAAAAAAE',
+                    '/assets/images/stories/1/favorites-story-2.png',
             },
             {
-                storyId: 1,
+                storyId: 2,
                 sourceUrl:
-                    'https://cdn.inappstory.ru/file/ts/p9/vq/zktyxdxnjqbzufonxd8ffk44cb.webp?k=IgAAAAAAAAAE',
+                    '/assets/images/stories/2/testimonials-story-1.png',
             },
             {
-                storyId: 1,
+                storyId: 2,
                 sourceUrl:
-                    'https://cdn.inappstory.ru/file/ur/uq/le/9ufzwtpdjeekidqq04alfnxvu2.webp?k=IgAAAAAAAAAE',
+                    '/assets/images/stories/2/testimonials-story-2.png',
             },
             {
-                storyId: 1,
+                storyId: 3,
                 sourceUrl:
-                    'https://cdn.inappstory.ru/file/sy/vl/c7/uyqzmdojadcbw7o0a35ojxlcul.webp?k=IgAAAAAAAAAE',
+                    '/assets/images/stories/3/team-story-1.png',
+            },
+            {
+                storyId: 3,
+                sourceUrl:
+                    '/assets/images/stories/3/team-story-2.png',
+            },
+            {
+                storyId: 4,
+                sourceUrl:
+                    '/assets/images/stories/4/scenes-story-1.png',
+            },
+            {
+                storyId: 4,
+                sourceUrl:
+                    '/assets/images/stories/4/scenes-story-2.png',
+            },
+            {
+                storyId: 5,
+                sourceUrl:
+                    '/assets/images/stories/5/office-strory-1.png',
+            },
+            {
+                storyId: 5,
+                sourceUrl:
+                    '/assets/images/stories/5/office-strory-2.png',
+            },
+            {
+                storyId: 6,
+                sourceUrl:
+                    '/assets/images/stories/6/facts-story-1.png',
+            },
+            {
+                storyId: 6,
+                sourceUrl:
+                    '/assets/images/stories/6/facts-story-2.png',
             },
         ],
     });

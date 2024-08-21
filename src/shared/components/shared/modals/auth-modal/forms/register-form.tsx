@@ -39,15 +39,9 @@ export const RegisterForm: React.FC<Props> = ({ onClose, onClickLogin }) => {
 
       onClose?.();
     } catch (error) {
-      if (error instanceof Error) {
-        return toast.error(error.message, {
-          icon: '❌',
-        });
-      } else {
-        return toast.error('Invalid email or password', {
-          icon: '❌',
-        });
-      }
+      return toast.error('User already exists', {
+        icon: '❌',
+      });
     }
   };
 
