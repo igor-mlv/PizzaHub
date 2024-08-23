@@ -38,7 +38,7 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
             variant="secondary"
             onClick={() =>
               signIn('github', {
-                callbackUrl: '/',
+                callbackUrl: process.env.NEXT_PUBLIC_BASE_URL,
                 redirect: true,
               })
             }
@@ -55,7 +55,7 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
             variant="secondary"
             onClick={() =>
               signIn('google', {
-                callbackUrl: '/',
+                callbackUrl: process.env.NEXT_PUBLIC_BASE_URL,
                 redirect: true,
               })
             }
