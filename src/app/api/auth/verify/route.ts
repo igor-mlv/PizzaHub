@@ -34,7 +34,7 @@ export async function GET(req: NextRequest) {
       },
     });
 
-    return NextResponse.redirect(new URL('/?verified', req.url));
+    return NextResponse.redirect(new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/?verified`, req.url));
   } catch (error) {
     console.log('[VERIFY_GET] Server error', error);
     return NextResponse.json({ error: 'Server error' }, { status: 500 });
