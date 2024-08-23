@@ -49,6 +49,13 @@ export async function createOrder(data: CheckoutFormValues) {
       throw new Error('Cart is empty');
     }
 
+    const HST = 13;
+    const DELIVERY_PRICE = 15;
+
+    const hstPrice = (userCart.totalAmount * HST) / 100;
+
+    const amountAfterTaxAndDeleviry = userCart.totalAmount + DELIVERY_PRICE + hstPrice;
+
     /* Create order */
     const order = await prisma.order.create({
       data: {
@@ -58,7 +65,7 @@ export async function createOrder(data: CheckoutFormValues) {
         phone: data.phone,
         address: data.address,
         comment: data.comment,
-        totalAmount: Number(userCart.totalAmount.toFixed(2)),
+        totalAmount: Number(amountAfterTaxAndDeleviry.toFixed(2)),
         status: OrderStatus.PENDING,
         items: JSON.stringify(userCart.items),
       },
@@ -81,7 +88,7 @@ export async function createOrder(data: CheckoutFormValues) {
     });
 
     const paymentData = await createPaymentLink({
-      amount: order.totalAmount,
+      amount: Number(amountAfterTaxAndDeleviry.toFixed(2)),
       orderId: order.id,
       description: 'Order Payment #' + order.id,
     });
